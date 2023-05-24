@@ -16,7 +16,7 @@ const Authorization = () => {
   const handleChangeAuth = () => {
     setChangeAuth(!changeAuth);
     setFormData({ login: "", password: "" });
-    setAuthStatus("")
+    setAuthStatus("");
   };
 
   const fetchUsers = async () => {
@@ -32,6 +32,17 @@ const Authorization = () => {
   const newUser = async () => {
     const user = await registerUser(formData);
   };
+
+  const handlesaveUser = () => {
+    localStorage.setItem("user", JSON.stringify(formData));
+  };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setFormData(JSON.parse(storedUser));
+    }
+  }, []);
 
   console.log(formData, authStatus);
 
@@ -50,6 +61,7 @@ const Authorization = () => {
       ) {
         setIsAuth(true);
         setAuthStatus("Login success");
+        handlesaveUser();
         return;
       }
       if (
@@ -78,6 +90,7 @@ const Authorization = () => {
 
   return (
     <div className="auth-wrapper">
+      {formData.login && <p>Welcome, {formData.login}</p>}
       <div className="auth-buttons-container">
         <button
           onClick={handleChangeAuth}
