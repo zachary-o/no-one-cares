@@ -10,10 +10,13 @@ const Authorization = () => {
     login: "",
     password: "",
   });
+  const [isAuth, setIsAuth] = useState(null);
   const [authStatus, setAuthStatus] = useState("");
 
   const handleChangeAuth = () => {
     setChangeAuth(!changeAuth);
+    setFormData({ login: "", password: "" });
+    setAuthStatus("")
   };
 
   const fetchUsers = async () => {
@@ -26,25 +29,49 @@ const Authorization = () => {
     fetchUsers();
   }, []);
 
-  console.log(formData);
+  const newUser = async () => {
+    const user = await registerUser(formData);
+  };
+
+  console.log(formData, authStatus);
 
   const validateFormData = (event) => {
     event.preventDefault();
     if (changeAuth) {
       if (formData.login === "" || formData.password === "") {
-        setAuthStatus("Please enter credentials");
+        setIsAuth(false);
+        setAuthStatus("Please fill all fields");
+
+        return;
       }
       if (
         users.find((user) => user.login === formData.login) &&
         users.find((user) => user.password === formData.password)
       ) {
+        setIsAuth(true);
         setAuthStatus("Login success");
+        return;
       }
       if (
         users.find((user) => user.login !== formData.login) ||
         users.find((user) => user.password !== formData.password)
       ) {
+        setIsAuth(false);
         setAuthStatus("Incorrect login or password");
+        return;
+      }
+    }
+
+    if (!changeAuth) {
+      if (formData.login === "" || formData.password === "") {
+        setIsAuth(false);
+        setAuthStatus("Please enter credentials");
+        return;
+      }
+      if (users.find((user) => user.login !== formData.login)) {
+        newUser();
+        setIsAuth(true);
+        setAuthStatus("User created");
       }
     }
   };
@@ -89,7 +116,7 @@ const Authorization = () => {
             setFormData({ ...formData, password: event.target.value })
           }
         />
-        <h4>{authStatus}</h4>
+        <h4 style={{ color: isAuth ? "green" : "red" }}>{authStatus}</h4>
         <button onClick={(event) => validateFormData(event)}>
           {changeAuth ? "Login" : "Register"}
         </button>
