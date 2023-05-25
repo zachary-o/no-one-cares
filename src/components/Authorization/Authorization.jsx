@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../../App";
 
-import getUsers from "../utils/getUsers";
-import registerUser from "../utils/registerUser";
+import getUsers from "../../utils/getUsers";
+import registerUser from "../../utils/registerUser";
+
+import "./styles.css";
 
 const Authorization = () => {
   const [changeAuth, setChangeAuth] = useState(true);
@@ -13,6 +17,9 @@ const Authorization = () => {
   const [isAuth, setIsAuth] = useState(null);
   const [authStatus, setAuthStatus] = useState("");
 
+  const { setLocalStorageUser } = useContext(Context);
+  const navigate = useNavigate();
+
   const handleChangeAuth = () => {
     setChangeAuth(!changeAuth);
     setFormData({ login: "", password: "" });
@@ -22,7 +29,6 @@ const Authorization = () => {
   const fetchUsers = async () => {
     const users = await getUsers();
     setUsers(users);
-    console.log(users);
   };
 
   useEffect(() => {
@@ -33,18 +39,16 @@ const Authorization = () => {
     const user = await registerUser(formData);
   };
 
-  const handlesaveUser = () => {
+  const handleSaveUser = () => {
     localStorage.setItem("user", JSON.stringify(formData));
   };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setFormData(JSON.parse(storedUser));
+      setLocalStorageUser(JSON.parse(storedUser));
     }
   }, []);
-
-  console.log(formData, authStatus);
 
   const validateFormData = (event) => {
     event.preventDefault();
@@ -52,7 +56,6 @@ const Authorization = () => {
       if (formData.login === "" || formData.password === "") {
         setIsAuth(false);
         setAuthStatus("Please fill all fields");
-
         return;
       }
       if (
@@ -61,7 +64,9 @@ const Authorization = () => {
       ) {
         setIsAuth(true);
         setAuthStatus("Login success");
-        handlesaveUser();
+        handleSaveUser();
+        setLocalStorageUser(formData);
+        navigate("/home");
         return;
       }
       if (
@@ -84,13 +89,14 @@ const Authorization = () => {
         newUser();
         setIsAuth(true);
         setAuthStatus("User created");
+        setLocalStorageUser(formData);
+        navigate("/home");
       }
     }
   };
 
   return (
     <div className="auth-wrapper">
-      {formData.login && <p>Welcome, {formData.login}</p>}
       <div className="auth-buttons-container">
         <button
           onClick={handleChangeAuth}
