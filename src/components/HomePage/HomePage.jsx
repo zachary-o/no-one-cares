@@ -9,6 +9,7 @@ const HomePage = () => {
   const { localStorageUser } = useContext(Context);
 
   console.log(localStorageUser);
+  
   return (
     <div className="home-page">
       <Navbar />

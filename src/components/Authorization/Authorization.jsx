@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import getUsers from "../../utils/getUsers";
@@ -36,7 +37,12 @@ const Authorization = () => {
   }, []);
 
   const newUser = async () => {
-    const user = await registerUser(formData);
+    try {
+      const user = await registerUser(formData);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const handleSaveUser = () => {
@@ -85,15 +91,27 @@ const Authorization = () => {
         setAuthStatus("Please enter credentials");
         return;
       }
-      if (users.find((user) => user.login !== formData.login)) {
-        newUser();
-        setIsAuth(true);
-        setAuthStatus("User created");
-        setLocalStorageUser(formData);
-        navigate("/home");
+      if (users.find((user) => user.login === formData.login)) {
+        setIsAuth(false);
+        setAuthStatus("User already exists");
+        return;
       }
+      newUser()
+        .then(() => {
+          setIsAuth(true);
+          setAuthStatus("User created");
+          handleSaveUser();
+        })
+        .catch((error) => {
+          setIsAuth(false);
+          setAuthStatus("Registration failed");
+          console.log(error);
+        })
+        .finally(() => navigate("/home"));
     }
   };
+
+  console.log(users);
 
   return (
     <div className="auth-wrapper">
