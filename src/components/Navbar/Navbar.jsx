@@ -10,12 +10,21 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setLocalStorageUser("");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
     <div className="navbar">
-      <h1>Hello, {localStorageUser.login}</h1>
+      <h1>
+        Hello,{" "}
+        <span className="login-button"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          {localStorageUser.login}
+        </span>
+      </h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

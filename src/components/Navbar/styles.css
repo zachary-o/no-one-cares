@@ -9,3 +9,13 @@
   -moz-box-shadow: 0px 0px 72px 7px rgba(100, 144, 191, 1);
   box-shadow: 0px 0px 72px 7px rgba(100, 144, 191, 1);
 }
+
+.login-button {
+  color: blue;
+}
+
+.login-button:hover {
+  color: darkviolet;
+  text-decoration: underline;
+  cursor: pointer;
+}

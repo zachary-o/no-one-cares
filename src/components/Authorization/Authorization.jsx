@@ -49,12 +49,6 @@ const Authorization = () => {
     localStorage.setItem("user", JSON.stringify(formData));
   };
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setLocalStorageUser(JSON.parse(storedUser));
-    }
-  }, []);
 
   const validateFormData = (event) => {
     event.preventDefault();
@@ -72,7 +66,7 @@ const Authorization = () => {
         setAuthStatus("Login success");
         handleSaveUser();
         setLocalStorageUser(formData);
-        navigate("/home");
+        navigate("/");
         return;
       }
       if (
@@ -97,7 +91,7 @@ const Authorization = () => {
         return;
       }
       newUser()
-        .then(() => {
+        .then((user) => {
           setIsAuth(true);
           setAuthStatus("User created");
           handleSaveUser();
@@ -107,7 +101,7 @@ const Authorization = () => {
           setAuthStatus("Registration failed");
           console.log(error);
         })
-        .finally(() => navigate("/home"));
+        .finally(() => navigate("/"));
     }
   };
 
