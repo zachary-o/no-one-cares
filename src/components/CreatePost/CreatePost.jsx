@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import Navbar from "../Navbar/Navbar";
 
@@ -16,6 +17,7 @@ const CreatePost = () => {
     upvotes: "",
     id: "",
   });
+  const navigate = useNavigate();
 
   const handleSavePost = async (event) => {
     event.preventDefault();
@@ -29,6 +31,7 @@ const CreatePost = () => {
         upvotes: "",
         id: "",
       });
+      navigate("/");
       console.log("Post saved successfully:", publishNewPost);
     } catch (error) {
       throw error;

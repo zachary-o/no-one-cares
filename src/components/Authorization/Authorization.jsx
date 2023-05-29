@@ -7,6 +7,7 @@ import getUsers from "../../utils/getUsers";
 import registerUser from "../../utils/registerUser";
 
 import "./styles.css";
+import logo from "../../assets/icons/logo.svg";
 
 const Authorization = () => {
   const [changeAuth, setChangeAuth] = useState(true);
@@ -48,7 +49,6 @@ const Authorization = () => {
   const handleSaveUser = () => {
     localStorage.setItem("user", JSON.stringify(formData));
   };
-
 
   const validateFormData = (event) => {
     event.preventDefault();
@@ -108,51 +108,54 @@ const Authorization = () => {
   console.log(users);
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-buttons-container">
-        <button
-          onClick={handleChangeAuth}
-          className={changeAuth ? "auth-button-active" : "auth-button"}
-          disabled={changeAuth}
-        >
-          Sign In
-        </button>
-        <button
-          onClick={handleChangeAuth}
-          className={!changeAuth ? "auth-button-active" : "auth-button"}
-          disabled={!changeAuth}
-        >
-          Sign Up
-        </button>
-      </div>
+    <>
+      <img src={logo} alt="" className="logo" />
+      <div className="auth-wrapper">
+        <div className="auth-buttons-container">
+          <button
+            onClick={handleChangeAuth}
+            className={changeAuth ? "auth-button-active" : "auth-button"}
+            disabled={changeAuth}
+          >
+            Sign In
+          </button>
+          <button
+            onClick={handleChangeAuth}
+            className={!changeAuth ? "auth-button-active" : "auth-button"}
+            disabled={!changeAuth}
+          >
+            Sign Up
+          </button>
+        </div>
 
-      <form action="">
-        <input
-          type="text"
-          name="login"
-          placeholder="Login"
-          required
-          value={formData.login}
-          onChange={(event) =>
-            setFormData({ ...formData, login: event.target.value })
-          }
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-          value={formData.password}
-          onChange={(event) =>
-            setFormData({ ...formData, password: event.target.value })
-          }
-        />
-        <h4 style={{ color: isAuth ? "green" : "red" }}>{authStatus}</h4>
-        <button onClick={(event) => validateFormData(event)}>
-          {changeAuth ? "Login" : "Register"}
-        </button>
-      </form>
-    </div>
+        <form action="">
+          <input
+            type="text"
+            name="login"
+            placeholder="Login"
+            required
+            value={formData.login}
+            onChange={(event) =>
+              setFormData({ ...formData, login: event.target.value })
+            }
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            value={formData.password}
+            onChange={(event) =>
+              setFormData({ ...formData, password: event.target.value })
+            }
+          />
+          <h4 style={{ color: isAuth ? "green" : "red" }}>{authStatus}</h4>
+          <button onClick={(event) => validateFormData(event)}>
+            {changeAuth ? "Login" : "Register"}
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 export default Authorization;

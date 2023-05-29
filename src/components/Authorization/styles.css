@@ -12,6 +12,12 @@
   box-shadow: 0px 0px 72px 7px rgba(100, 144, 191, 1);
 }
 
+.logo.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form {
   margin-top: 30px;
   width: 61%;
@@ -37,6 +43,7 @@ form button {
   border: 1px solid #97d9e1;
   background-color: #fff;
   font-size: 18px;
+  cursor: pointer;
 }
 
 h4 {
@@ -60,6 +67,7 @@ h4 {
   border: 1px solid #97d9e1;
   background-color: #fff;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .auth-button:last-child {
@@ -75,6 +83,7 @@ h4 {
   font-size: 18px;
   background-color: lightgray;
   color: black;
+  cursor: pointer;
 }
 
 .auth-button-active:last-child:disabled {
