@@ -108,8 +108,10 @@ const Authorization = () => {
   console.log(users);
 
   return (
-    <>
-      <img src={logo} alt="" className="logo" />
+    <div className="auth">
+      <div className="logo-container">
+        <img src={logo} alt="" className="auth-logo" />
+      </div>
       <div className="auth-wrapper">
         <div className="auth-buttons-container">
           <button
@@ -155,7 +157,7 @@ const Authorization = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 export default Authorization;

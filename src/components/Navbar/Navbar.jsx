@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import {  useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
@@ -16,7 +16,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <div className="logo-container">
         <img
           src={logo}
           alt=""
@@ -25,7 +24,6 @@ const Navbar = () => {
             navigate("/");
           }}
         />
-      </div>
 
       <div className="user-info">
         <p>

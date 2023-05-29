@@ -1,0 +1,66 @@
+.post-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  width: 90%;
+  max-height: 300px;
+  margin: 10px auto;
+  border: 1px solid gray;
+  border-radius: 15px;
+  flex-wrap: wrap;
+  background-color: antiquewhite;
+}
+
+.author-and-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 10px 0 0 10px;
+  font-size: 12px;
+  color: rgb(68, 68, 68);
+}
+
+.author-and-date p {
+  margin-right: 10px;
+}
+
+.post-title {
+  align-self: flex-start;
+  margin: 10px 10px;
+}
+
+.post-body {
+  margin: 10px 10px;
+  width: 95%;
+  align-self: flex-start;
+  overflow-wrap: break-word;
+}
+
+.upvotes {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px;
+}
+
+.upvotes > * {
+  margin-right: 5px;
+}
+
+.upvotes p {
+  font-weight: 700;
+}
+
+.upvote,
+.downvote {
+  width: 15px;
+  height: 15px;
+  border: black;
+}
+
+.upvote:hover {
+  fill: green;
+}
+
+.downvote:hover {
+  fill: red;
+}

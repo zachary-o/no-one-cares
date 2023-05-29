@@ -22,7 +22,7 @@ const CreatePost = () => {
   const handleSavePost = async (event) => {
     event.preventDefault();
     try {
-      const publishNewPost = await createPost(newPost);
+      await createPost(newPost);
       setNewPost({
         author: "",
         title: "",
@@ -32,7 +32,6 @@ const CreatePost = () => {
         id: "",
       });
       navigate("/");
-      console.log("Post saved successfully:", publishNewPost);
     } catch (error) {
       throw error;
     }
@@ -61,31 +60,38 @@ const CreatePost = () => {
   console.log(newPost);
 
   return (
-    <div className="create-post">
+    <div className="wrapper">
       <Navbar />
-      <form action="">
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          required
-          value={newPost.title}
-          onChange={(event) => handleInputChange(event)}
-        />
-        <label>
-          Text:
+      <div className="create-post">
+        <form action="">
+          <label htmlFor="title">Title</label>
+          <input
+            className="title-input"
+            type="text"
+            name="title"
+            placeholder="Title"
+            required
+            value={newPost.title}
+            onChange={(event) => handleInputChange(event)}
+          />
+          <label htmlFor="text">Text</label>
           <textarea
+            className="textarea"
             name="text"
             placeholder="Body"
             required
             value={newPost.text}
             onChange={(event) => handleInputChange(event)}
           />
-        </label>
-        <button type="submit" onClick={(event) => handleSavePost(event)}>
-          Save
-        </button>
-      </form>
+          <button
+            className="save-post-button"
+            type="submit"
+            onClick={(event) => handleSavePost(event)}
+          >
+            Save
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
