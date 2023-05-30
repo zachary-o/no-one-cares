@@ -4,11 +4,13 @@ import { Context } from "../../App";
 import Navbar from "../Navbar/Navbar";
 
 import createPost from "../../utils/createPost";
+import updateUser from "../../utils/updateUser";
 
 import "./styles.css";
 
 const CreatePost = () => {
-  const { localStorageUser } = useContext(Context);
+  const { localStorageUser, posts, setPosts, users, setUsers, neededUser } =
+    useContext(Context);
   const [newPost, setNewPost] = useState({
     author: "",
     title: "",
@@ -18,6 +20,7 @@ const CreatePost = () => {
     id: "",
   });
   const navigate = useNavigate();
+
 
   const handleSavePost = async (event) => {
     event.preventDefault();
@@ -31,14 +34,20 @@ const CreatePost = () => {
         upvotes: "",
         id: "",
       });
+
+      const userPostsNumber = posts.filter(
+        (post) => post.author === localStorageUser.login
+      ).length;
+      await updateUser(neededUser.id, userPostsNumber);
       navigate("/");
     } catch (error) {
       throw error;
     }
   };
 
+  console.log(users, posts);
+
   const handleInputChange = (event) => {
-    event.preventDefault();
     const postCreationTime = new Date().toLocaleString([], {
       year: "numeric",
       month: "short",
@@ -56,8 +65,6 @@ const CreatePost = () => {
       createdAt: postCreationTime,
     }));
   };
-
-  console.log(newPost);
 
   return (
     <div className="wrapper">

@@ -11,7 +11,6 @@ import logo from "../../assets/icons/logo.svg";
 
 const Authorization = () => {
   const [changeAuth, setChangeAuth] = useState(true);
-  const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
     login: "",
     password: "",
@@ -19,7 +18,7 @@ const Authorization = () => {
   const [isAuth, setIsAuth] = useState(null);
   const [authStatus, setAuthStatus] = useState("");
 
-  const { setLocalStorageUser } = useContext(Context);
+  const { setLocalStorageUser, users, getUsers } = useContext(Context);
   const navigate = useNavigate();
 
   const handleChangeAuth = () => {
@@ -27,15 +26,6 @@ const Authorization = () => {
     setFormData({ login: "", password: "" });
     setAuthStatus("");
   };
-
-  const fetchUsers = async () => {
-    const users = await getUsers();
-    setUsers(users);
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const newUser = async () => {
     try {

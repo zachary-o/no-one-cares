@@ -1,10 +1,44 @@
+import { useContext } from "react";
+import { Context } from "../../App";
+
+import updatePost from "../../utils/updatePost";
+
 import "./styles.css";
 
-const Tweet = ({
-  post,
-  handleUpvote,
-  handleDownvote,
-}) => {
+const Tweet = ({ post }) => {
+  const { posts, setPosts } = useContext(Context);
+
+  const handleUpvote = async (postId) => {
+    const hasVoted = localStorage.getItem(`voted_${postId}`);
+    console.log(hasVoted);
+    if (!hasVoted) {
+      const updatedPosts = [...posts];
+      const postIndex = updatedPosts.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        updatedPosts[postIndex].upvotes = updatedPosts[postIndex].upvotes + 1;
+        setPosts(updatedPosts);
+        await updatePost(postId, updatedPosts[postIndex].upvotes);
+        localStorage.setItem(`voted_${postId}`, true);
+      }
+    }
+  };
+
+  const handleDownvote = async (postId) => {
+    const hasVoted = localStorage.getItem(`voted_${postId}`);
+    console.log(hasVoted);
+
+    if (!hasVoted) {
+      const updatedPosts = [...posts];
+      const postIndex = updatedPosts.findIndex((post) => post.id === postId);
+      if (postIndex !== -1) {
+        updatedPosts[postIndex].upvotes = updatedPosts[postIndex].upvotes - 1;
+        setPosts(updatedPosts);
+        await updatePost(postId, updatedPosts[postIndex].upvotes);
+        localStorage.setItem(`voted_${postId}`, true);
+      }
+    }
+  };
+
   return (
     <div className="posts-wrapper">
       <div className="post-wrapper">
@@ -50,7 +84,6 @@ const Tweet = ({
           </svg>
         </div>
       </div>
-      
     </div>
   );
 };

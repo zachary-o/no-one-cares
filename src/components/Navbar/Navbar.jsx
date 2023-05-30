@@ -31,7 +31,7 @@ const Navbar = () => {
           <span
             className="username-button"
             onClick={() => {
-              navigate("/");
+              navigate("/user-page");
             }}
           >
             {localStorageUser.login}
