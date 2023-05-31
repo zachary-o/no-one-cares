@@ -95,8 +95,6 @@ const Authorization = () => {
     }
   };
 
-  console.log(users);
-
   return (
     <div className="auth">
       <div className="logo-container">

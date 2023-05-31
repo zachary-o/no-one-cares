@@ -15,7 +15,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [localStorageUser, setLocalStorageUser] = useState("");
   const [posts, setPosts] = useState([]);
-  const [neededUser, setNeededUser] = useState({});
+  const [loggedUser, setLoggedUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function App() {
   }, [localStorageUser]);
 
   useEffect(() => {
-    setNeededUser(users.find((user) => user.login === localStorageUser.login));
+    setLoggedUser(users.find((user) => user.login === localStorageUser.login));
   }, [users]);
 
   return (
@@ -60,7 +60,7 @@ function App() {
         setPosts,
         users,
         setUsers,
-        neededUser,
+        loggedUser,
       }}
     >
       <div className="App">

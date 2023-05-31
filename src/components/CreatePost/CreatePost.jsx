@@ -9,8 +9,7 @@ import updateUser from "../../utils/updateUser";
 import "./styles.css";
 
 const CreatePost = () => {
-  const { localStorageUser, posts, setPosts, users, setUsers, neededUser } =
-    useContext(Context);
+  const { localStorageUser, posts, users, loggedUser } = useContext(Context);
   const [newPost, setNewPost] = useState({
     author: "",
     title: "",
@@ -38,14 +37,13 @@ const CreatePost = () => {
       const userPostsNumber = posts.filter(
         (post) => post.author === localStorageUser.login
       ).length;
-      await updateUser(neededUser.id, userPostsNumber);
+      await updateUser(loggedUser.id, userPostsNumber);
       navigate("/");
     } catch (error) {
       throw error;
     }
   };
 
-  console.log(users, posts);
 
   const handleInputChange = (event) => {
     const postCreationTime = new Date().toLocaleString([], {

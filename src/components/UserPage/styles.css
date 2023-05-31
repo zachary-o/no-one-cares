@@ -1,0 +1,76 @@
+h1 {
+  align-self: center;
+  margin-top: 200px;
+}
+
+.users-info {
+  margin: 160px auto 0 auto;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.users-info table {
+  border: 1px solid #97d9e1;
+  border-radius: 10px;
+  background-color: antiquewhite;
+}
+
+.users-info td {
+  padding: 8px;
+}
+
+.users-info td:first-child {
+  font-weight: bold;
+  width: 120px;
+  text-align: left;
+}
+
+.users-info input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.users-info input:focus {
+  outline: 2px solid #97d9e1;
+}
+
+.users-info input:read-only {
+  background-color: #ddd;
+}
+
+.password-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.show-password {
+  color: gray;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.edit-user-info-button {
+  padding: 10px 20px;
+  border-radius: 10px 10px 10px 10px;
+  border: 1px solid #97dae1;
+  background-color: #fff;
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.edit-user-info-button:hover {
+  background-color: lightgray;
+}

@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const updateUser = async (userId, oldPostsCount) => {
+const editUser = async (userId, newProfileInfo) => {
   try {
     await axios.put(
       `https://646d10197b42c06c3b2c7fc2.mockapi.io/users/${userId}`,
       {
-        posts: oldPostsCount + 1,
+        password: newProfileInfo.password,
+        email: newProfileInfo.email,
       }
     );
   } catch (error) {
@@ -13,4 +14,4 @@ const updateUser = async (userId, oldPostsCount) => {
   }
 };
 
-export default updateUser;
+export default editUser;

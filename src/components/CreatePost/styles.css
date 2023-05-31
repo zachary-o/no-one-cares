@@ -15,6 +15,10 @@
   border-radius: 5px;
 }
 
+.title-input:focus {
+  outline: 2px solid #97d9e1;
+}
+
 .textarea {
   resize: none;
   height: 300px;
@@ -24,7 +28,7 @@
 }
 
 .textarea:focus {
-  outline: 1px solid #97d9e1;
+  outline: 2px solid #97d9e1;
 }
 
 label {
