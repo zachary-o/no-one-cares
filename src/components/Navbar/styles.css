@@ -1,6 +1,4 @@
 .navbar {
-  position: fixed;
-  top: 0;
   background-color: antiquewhite;
   padding: 10px 20px;
   z-index: 100;
@@ -14,6 +12,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .logo {

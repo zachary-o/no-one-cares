@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Navbar from "../Navbar/Navbar";
 import Tweet from "../Tweet/Tweet";
+import SidePanel from "../SidePanel/SidePanel";
 
 import getPosts from "../../utils/getPosts";
 
@@ -26,17 +27,22 @@ const AllPosts = () => {
   return (
     <div className="wrapper">
       <Navbar />
-      <div className="all-posts">
-        <h1 className="all-posts-header">Latest on No One Cares Blog:</h1>
-        {allPosts.slice(0, visible).map((post) => (
-          <Tweet key={post.id} post={post} />
-        ))}
-        {allPosts.length > 0 && visible <= allPosts.length ? (
-          <button onClick={handleShowMorePosts} className="load-more-button">
-            Load more
-          </button>
-        ) : null}
-      </div>
+      <main>
+        <div className="all-posts">
+          <h1 className="all-posts-header">
+            {allPosts ? "Latest on No One Cares Blog:" : "No posts yet"}
+          </h1>
+          {allPosts.slice(0, visible).map((post) => (
+            <Tweet key={post.id} post={post} />
+          ))}
+          {allPosts.length > 0 && visible <= allPosts.length ? (
+            <button onClick={handleShowMorePosts} className="load-more-button">
+              Load more
+            </button>
+          ) : null}
+        </div>
+        <SidePanel />
+      </main>
     </div>
   );
 };

@@ -1,0 +1,16 @@
+.side-panel {
+  width: 25%;
+  background-color: antiquewhite;
+  margin-top: -40px;
+  padding: 30px 10px;
+}
+
+.top-users {
+  margin-top: 15px;
+}
+
+.top-user {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}

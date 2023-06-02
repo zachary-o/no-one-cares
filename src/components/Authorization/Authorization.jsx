@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import registerUser from "../../utils/registerUser";
+import resetPosts from "../../utils/resetPosts";
 
 import "./styles.css";
 import logo from "../../assets/icons/logo.svg";
@@ -28,6 +29,7 @@ const Authorization = () => {
   const newUser = async () => {
     try {
       const user = await registerUser(formData);
+      await resetPosts(user.id);
       return user;
     } catch (error) {
       throw error;
