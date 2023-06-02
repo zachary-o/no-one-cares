@@ -10,7 +10,6 @@ const Tweet = ({ post }) => {
 
   const handleUpvote = async (postId) => {
     const hasVoted = localStorage.getItem(`voted_${postId}`);
-    console.log(hasVoted);
     if (!hasVoted) {
       const updatedPosts = [...posts];
       const postIndex = updatedPosts.findIndex((post) => post.id === postId);
@@ -25,8 +24,6 @@ const Tweet = ({ post }) => {
 
   const handleDownvote = async (postId) => {
     const hasVoted = localStorage.getItem(`voted_${postId}`);
-    console.log(hasVoted);
-
     if (!hasVoted) {
       const updatedPosts = [...posts];
       const postIndex = updatedPosts.findIndex((post) => post.id === postId);

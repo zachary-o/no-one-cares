@@ -16,6 +16,7 @@ const UserPage = () => {
     email: "",
   });
   const [authStatus, setAuthStatus] = useState("");
+  const [isAuth, setIsAuth] = useState(null);
 
   const { loggedUser, posts } = useContext(Context);
 
@@ -65,18 +66,45 @@ const UserPage = () => {
 
   const handleSaveUserInfo = async (event) => {
     event.preventDefault();
-
-    // if (!newProfileInfo.password || !newProfileInfo.email) {
-    //   setAuthStatus("Please fill all fields");
-    //   return;
-    // }
-    // if (newProfileInfo.password.length < 6) {
-    //   setAuthStatus("Password must be at least 6 characters");
-    //   return;
-    // }
+    if (editProfile) {
+      if (
+        newProfileInfo.password.trim() === "" ||
+        newProfileInfo.email.trim() === ""
+      ) {
+        setIsAuth(false);
+        setAuthStatus("Please fill all fields");
+        setNewProfileInfo({ password: "", email: "" });
+        return;
+      }
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(newProfileInfo.email)) {
+        setIsAuth(false);
+        setAuthStatus("Invalid email format.");
+        return;
+      }
+      if (newProfileInfo.password.length < 6) {
+        setIsAuth(false);
+        setAuthStatus("Password must be at least 6 characters");
+        return;
+      }
+      if (newProfileInfo.password && newProfileInfo.email) {
+        setIsAuth(null);
+        setAuthStatus("");
+      }
+    }
 
     try {
+      setNewProfileInfo((prevInfo) => ({
+        ...prevInfo,
+        password: newProfileInfo.password || loggedUser.password,
+        email: newProfileInfo.email || loggedUser.email,
+      }));
+
       await editUser(loggedUser.id, newProfileInfo);
+      setIsAuth(true);
+      if (editProfile) {
+        setAuthStatus("Successfully updated info");
+      }
       setEditProfile(!editProfile);
     } catch (error) {
       console.error("An error occurred while saving user info:", error);
@@ -189,7 +217,7 @@ const UserPage = () => {
                 <td>
                   <input
                     type="text"
-                    value={karma}
+                    value={karma ? karma : "Loading..."}
                     readOnly
                     style={totalKarmaStyles()}
                   />
@@ -201,6 +229,7 @@ const UserPage = () => {
       ) : (
         <h1>Loading data...</h1>
       )}
+      <h4 style={{ color: isAuth ? "green" : "red" }}>{authStatus}</h4>
 
       {loggedUser && posts && (
         <button

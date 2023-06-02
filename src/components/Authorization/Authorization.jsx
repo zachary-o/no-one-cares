@@ -1,9 +1,7 @@
-import { useEffect, useState, useContext } from "react";
-
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
-import getUsers from "../../utils/getUsers";
 import registerUser from "../../utils/registerUser";
 
 import "./styles.css";
@@ -70,7 +68,7 @@ const Authorization = () => {
     }
 
     if (!changeAuth) {
-      if (formData.login === "" || formData.password === "") {
+      if (formData.login.trim() === "" || formData.password.trim() === "") {
         setIsAuth(false);
         setAuthStatus("Please enter credentials");
         return;
@@ -78,6 +76,16 @@ const Authorization = () => {
       if (users.find((user) => user.login === formData.login)) {
         setIsAuth(false);
         setAuthStatus("User already exists");
+        return;
+      }
+      if (formData.login.length < 6) {
+        setIsAuth(false);
+        setAuthStatus("Login must be at least 6 characters");
+        return;
+      }
+      if (formData.password.length < 6) {
+        setIsAuth(false);
+        setAuthStatus("Password must be at least 6 characters");
         return;
       }
       newUser()

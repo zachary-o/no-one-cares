@@ -8,6 +8,7 @@ import Authorization from "./components/Authorization/Authorization";
 import HomePage from "./components/HomePage/HomePage";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UserPage from "./components/UserPage/UserPage";
+import AllPosts from "./components/AllPosts/AllPosts";
 
 export const Context = createContext();
 
@@ -69,6 +70,7 @@ function App() {
           <Route path="/login" element={<Authorization />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/user-page" element={<UserPage />} />
+          <Route path="/all-posts" element={<AllPosts />} />
         </Routes>
       </div>
     </Context.Provider>

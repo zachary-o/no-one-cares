@@ -1,5 +1,5 @@
-import {  useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import "./styles.css";
@@ -16,16 +16,19 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-        <img
-          src={logo}
-          alt=""
-          className="logo"
-          onClick={() => {
-            navigate("/");
-          }}
-        />
+      <img
+        src={logo}
+        alt=""
+        className="logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
 
       <div className="user-info">
+        <Link to="/all-posts" className="all-posts-link">
+          All Posts
+        </Link>
         <p>
           Hello,{" "}
           <span

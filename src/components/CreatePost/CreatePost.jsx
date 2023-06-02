@@ -9,7 +9,7 @@ import updateUser from "../../utils/updateUser";
 import "./styles.css";
 
 const CreatePost = () => {
-  const { localStorageUser, posts, users, loggedUser } = useContext(Context);
+  const { localStorageUser, posts, loggedUser } = useContext(Context);
   const [newPost, setNewPost] = useState({
     author: "",
     title: "",
