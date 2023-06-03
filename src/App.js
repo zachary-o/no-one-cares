@@ -4,11 +4,12 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import getPosts from "./utils/getPosts";
 import getUsers from "./utils/getUsers";
 
-import Authorization from "./components/Authorization/Authorization";
-import HomePage from "./components/HomePage/HomePage";
-import CreatePost from "./components/CreatePost/CreatePost";
-import UserPage from "./components/UserPage/UserPage";
-import AllPosts from "./components/AllPosts/AllPosts";
+import Authorization from "./pages/Authorization/Authorization";
+import HomePage from "./pages/HomePage/HomePage";
+import CreatePost from "./pages/CreatePost/CreatePost";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import AllPosts from "./pages/AllPosts/AllPosts";
+import UserPage from "./pages/UserPage/UserPage";
 
 export const Context = createContext();
 
@@ -69,8 +70,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Authorization />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/user-page" element={<UserPage />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/all-posts" element={<AllPosts />} />
+          <Route path="/user/:id" element={<UserPage />} />
         </Routes>
       </div>
     </Context.Provider>

@@ -1,41 +1,68 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../App";
 
 import updatePost from "../../utils/updatePost";
-
 import "./styles.css";
 
 const Tweet = ({ post }) => {
-  const { posts, setPosts } = useContext(Context);
+  const { posts, setPosts, loggedUser } = useContext(Context);
+  const [voteCount, setVoteCount] = useState(post.upvotes || 0);
+  const [showMore, setShowMore] = useState(false);
 
   const handleUpvote = async (postId) => {
-    const hasVoted = localStorage.getItem(`voted_${postId}`);
-    const userDidntVote = posts.voters.find()
+    const hasVoted = post.voters.includes(loggedUser.login);
     if (!hasVoted) {
-      const updatedPosts = [...posts];
-      const postIndex = updatedPosts.findIndex((post) => post.id === postId);
-      if (postIndex !== -1) {
-        updatedPosts[postIndex].upvotes = updatedPosts[postIndex].upvotes + 1;
-        setPosts(updatedPosts);
-        await updatePost(postId, updatedPosts[postIndex].upvotes);
-        localStorage.setItem(`voted_${postId}`, true);
+      try {
+        const updatedUpvotes = Number(post.upvotes) + 1;
+        const updatedVoters = [...post.voters, loggedUser.login];
+        const updatedPost = await updatePost(
+          postId,
+          updatedUpvotes,
+          updatedVoters
+        );
+        if (updatedPost) {
+          const updatedPosts = posts.map((p) =>
+            p.id === postId ? updatedPost : p
+          );
+          setPosts(updatedPosts);
+          setVoteCount(updatedUpvotes);
+        }
+      } catch (error) {
+        console.error(error);
       }
     }
   };
 
   const handleDownvote = async (postId) => {
-    const hasVoted = localStorage.getItem(`voted_${postId}`);
+    const hasVoted = post.voters.includes(loggedUser.login);
     if (!hasVoted) {
-      const updatedPosts = [...posts];
-      const postIndex = updatedPosts.findIndex((post) => post.id === postId);
-      if (postIndex !== -1) {
-        updatedPosts[postIndex].upvotes = updatedPosts[postIndex].upvotes - 1;
-        setPosts(updatedPosts);
-        await updatePost(postId, updatedPosts[postIndex].upvotes);
-        localStorage.setItem(`voted_${postId}`, true);
+      try {
+        const updatedUpvotes = Number(post.upvotes) - 1;
+        const updatedVoters = [...post.voters, loggedUser.login];
+        const updatedPost = await updatePost(
+          postId,
+          updatedUpvotes,
+          updatedVoters
+        );
+        if (updatedPost) {
+          const updatedPosts = posts.map((p) =>
+            p.id === postId ? updatedPost : p
+          );
+          setPosts(updatedPosts);
+          setVoteCount(updatedUpvotes);
+        }
+      } catch (error) {
+        console.error(error);
       }
     }
   };
+
+  const toggleText = () => {
+    setShowMore(!showMore);
+  };
+
+const displayText = showMore ? post.text : post.text.slice(0, 300) + "...";
+
 
   return (
     <div className="posts-wrapper">
@@ -46,7 +73,15 @@ const Tweet = ({ post }) => {
         </div>
 
         <h1 className="post-title">{post.title}</h1>
-        <p className="post-body">{post.text}</p>
+        <p className={`post-body ${showMore ? "show-more" : ""}`}>
+          {displayText}
+        </p>
+        {post.text.length > 300 && (
+          <button className="show-more-button" onClick={toggleText}>
+            {showMore ? "Show less" : "Show more"}
+          </button>
+        )}
+
         <div className="upvotes">
           <svg
             onClick={() => handleUpvote(post.id)}
@@ -63,7 +98,7 @@ const Tweet = ({ post }) => {
               strokeWidth="3"
             />
           </svg>
-          <p>{!post.upvotes ? 0 : post.upvotes}</p>
+          <p>{voteCount}</p>
           <svg
             onClick={() => handleDownvote(post.id)}
             style={{ transform: "rotate(180deg)" }}

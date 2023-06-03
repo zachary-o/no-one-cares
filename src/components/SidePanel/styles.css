@@ -3,6 +3,7 @@
   background-color: antiquewhite;
   margin-top: -40px;
   padding: 30px 10px;
+  height: auto;
 }
 
 .top-users {
@@ -13,4 +14,13 @@
   display: flex;
   justify-content: space-between;
   padding: 4px 0;
+}
+
+.top-user-link {
+  color: blue;
+  cursor: pointer;
+}
+
+.top-user-link:hover {
+  text-decoration: underline;
 }

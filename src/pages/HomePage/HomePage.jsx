@@ -4,8 +4,8 @@ import { Context } from "../../App";
 
 import getUsers from "../../utils/getUsers";
 
-import Navbar from "../Navbar/Navbar";
-import Tweet from "../Tweet/Tweet";
+import Navbar from "../../components/Navbar/Navbar";
+import Tweet from "../../components/Tweet/Tweet";
 
 import "./styles.css";
 

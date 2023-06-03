@@ -3,7 +3,7 @@ h1 {
 }
 
 .users-info {
-  margin: 160px auto 0 auto;
+  margin: 0 auto;
   width: 90%;
   display: flex;
   justify-content: center;

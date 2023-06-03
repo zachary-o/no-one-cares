@@ -11,12 +11,13 @@
   display: flex;
   flex-direction: column;
 
-  width: 90%;
-  max-height: 300px;
+  width: 70%;
+  max-height: 700px;
   margin: 10px auto;
   border: 1px solid gray;
   border-radius: 15px;
-  flex-wrap: wrap;
+  overflow: hidden;
+  word-wrap: break-word;
   background-color: antiquewhite;
 }
 
@@ -35,20 +36,48 @@
 
 .post-title {
   align-self: flex-start;
+  word-break: break-all;
   margin: 10px 10px;
 }
 
 .post-body {
-  margin: 10px 10px;
+  margin: 10px;
   width: 95%;
   align-self: flex-start;
-  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-body.show-more {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+.show-more-button {
+  color: black;
+  background-color: white;
+  border: 1px solid #97d9e1;
+  border-radius: 4px;
+  padding: 5px;
+  width: 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.show-more-button:hover {
+  background-color: lightgray;
 }
 
 .upvotes {
   display: flex;
   align-items: center;
-  margin: 10px 10px;
+  margin: 0 10px 10px 10px;
 }
 
 .upvotes > * {

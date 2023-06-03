@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import Navbar from "../Navbar/Navbar";
-import Tweet from "../Tweet/Tweet";
-import SidePanel from "../SidePanel/SidePanel";
+import Navbar from "../../components/Navbar/Navbar";
+import Tweet from "../../components/Tweet/Tweet";
+import SidePanel from "../../components/SidePanel/SidePanel";
 
 import getPosts from "../../utils/getPosts";
 

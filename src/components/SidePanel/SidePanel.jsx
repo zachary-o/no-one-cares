@@ -1,13 +1,22 @@
 import { useContext } from "react";
 import { Context } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
 const SidePanel = () => {
-  const { users } = useContext(Context);
+  const { users, loggedUser } = useContext(Context);
+  const navigate = useNavigate();
 
   const sortedUsers = users.sort((a, b) => b.posts - a.posts);
-  console.log(sortedUsers);
+
+  const handleNavigateUser = (id) => {
+    if (loggedUser.id === id) {
+      navigate("/");
+    } else {
+      navigate(`/user/${id}`);
+    }
+  };
 
   return (
     <div className="side-panel">
@@ -16,7 +25,12 @@ const SidePanel = () => {
         {sortedUsers.length &&
           sortedUsers.map((user) => (
             <div key={user.id} className="top-user">
-              <p>{user.login}</p>
+              <p
+                onClick={() => handleNavigateUser(user.id)}
+                className="top-user-link"
+              >
+                {user.login}
+              </p>
               <span>{user.posts}</span>
             </div>
           ))}

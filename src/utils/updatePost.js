@@ -1,18 +1,19 @@
 import axios from "axios";
 
-const updatePost = async (postId, newUpvotes) => {
+const updatePost = async (postId, upvotes, voters) => {
   try {
-    await axios.put(
+    const response = await axios.put(
       `https://646d10197b42c06c3b2c7fc2.mockapi.io/posts/${postId}`,
       {
-        upvotes: newUpvotes,
+        upvotes,
+        voters,
       }
     );
+    return response.data;
   } catch (error) {
-    console.error(
-      error
-    );
+    console.error(error);
+    return null;
   }
-}
+};
 
 export default updatePost;

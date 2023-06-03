@@ -3,11 +3,11 @@ import { Context } from "../../App";
 
 import editUser from "../../utils/editUser";
 
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 import "./styles.css";
 
-const UserPage = () => {
+const EditProfile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
   const [karma, setKarma] = useState("");
@@ -236,6 +236,7 @@ const UserPage = () => {
           className="edit-user-info-button"
           type={editProfile ? "submit" : ""}
           onClick={(event) => handleSaveUserInfo(event)}
+          disabled={!newProfileInfo.password && !newProfileInfo.email}
         >
           {editProfile ? "Save" : "Edit profile"}
         </button>
@@ -243,4 +244,4 @@ const UserPage = () => {
     </div>
   );
 };
-export default UserPage;
+export default EditProfile;

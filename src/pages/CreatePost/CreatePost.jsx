@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 import createPost from "../../utils/createPost";
 import updateUser from "../../utils/updateUser";
@@ -19,7 +19,7 @@ const CreatePost = () => {
     id: "",
   });
   const navigate = useNavigate();
-
+  const [authStatus, setAuthStatus] = useState("");
 
   const handleSavePost = async (event) => {
     event.preventDefault();
@@ -44,7 +44,6 @@ const CreatePost = () => {
     }
   };
 
-
   const handleInputChange = (event) => {
     const postCreationTime = new Date().toLocaleString([], {
       year: "numeric",
@@ -55,6 +54,14 @@ const CreatePost = () => {
       hour12: false,
     });
     const { name, value } = event.target;
+
+    if (newPost.title.length > 40 || newPost.text.length > 1200) {
+      setAuthStatus(
+        "The title must be fewer than 40 characters, and the body must be fewer than 1200 characters.\nRemember, no one cares."
+      );
+    } else {
+      setAuthStatus(null);
+    }
 
     setNewPost((prevPost) => ({
       ...prevPost,
@@ -69,6 +76,7 @@ const CreatePost = () => {
       <Navbar />
       <div className="create-post">
         <form action="">
+          <h4>{authStatus}</h4>
           <label htmlFor="title">Title</label>
           <input
             className="title-input"
