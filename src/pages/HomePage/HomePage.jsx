@@ -25,7 +25,7 @@ const HomePage = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [setUsers]);
 
   return (
     <div className="wrapper">
@@ -38,9 +38,13 @@ const HomePage = () => {
       >
         Create new post
       </button>
-      {posts.length ? posts.slice(0, visible).map((post) => (
-        <Tweet key={post.id} post={post} />
-      )) : <h1>No posts yet...</h1>}
+      {posts.length ? (
+        posts
+          .slice(0, visible)
+          .map((post) => <Tweet key={post.id} post={post} />)
+      ) : (
+        <h1>No posts yet...</h1>
+      )}
       {posts.length > 0 && visible <= posts.length ? (
         <button onClick={handleShowMorePosts} className="load-more-button">
           Load more

@@ -51,7 +51,7 @@ function App() {
 
   useEffect(() => {
     setLoggedUser(users.find((user) => user.login === localStorageUser.login));
-  }, [users]);
+  }, [users, localStorageUser]);
 
   return (
     <Context.Provider

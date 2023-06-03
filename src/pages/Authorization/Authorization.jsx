@@ -17,7 +17,7 @@ const Authorization = () => {
   const [isAuth, setIsAuth] = useState(null);
   const [authStatus, setAuthStatus] = useState("");
 
-  const { setLocalStorageUser, users, getUsers } = useContext(Context);
+  const { setLocalStorageUser, users } = useContext(Context);
   const navigate = useNavigate();
 
   const handleChangeAuth = () => {
