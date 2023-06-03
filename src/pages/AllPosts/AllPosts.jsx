@@ -41,7 +41,7 @@ const AllPosts = () => {
             </button>
           ) : null}
         </div>
-        <SidePanel />
+        <SidePanel allPosts={allPosts} />
       </main>
     </div>
   );

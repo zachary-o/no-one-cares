@@ -21,8 +21,8 @@ const Tweet = ({ post }) => {
           updatedVoters
         );
         if (updatedPost) {
-          const updatedPosts = posts.map((p) =>
-            p.id === postId ? updatedPost : p
+          const updatedPosts = posts.map((post) =>
+            post.id === postId ? updatedPost : post
           );
           setPosts(updatedPosts);
           setVoteCount(updatedUpvotes);
@@ -45,8 +45,8 @@ const Tweet = ({ post }) => {
           updatedVoters
         );
         if (updatedPost) {
-          const updatedPosts = posts.map((p) =>
-            p.id === postId ? updatedPost : p
+          const updatedPosts = posts.map((post) =>
+            post.id === postId ? updatedPost : post
           );
           setPosts(updatedPosts);
           setVoteCount(updatedUpvotes);
@@ -61,8 +61,23 @@ const Tweet = ({ post }) => {
     setShowMore(!showMore);
   };
 
-const displayText = showMore ? post.text : post.text.slice(0, 300) + "...";
+  const votesColor = () => {
+    let color = "black";
+    if (voteCount > 0) {
+      color = "green";
+    } else if (voteCount < 0) {
+      color = "red";
+    } else {
+      color = "black";
+    }
 
+    return {
+      color,
+    };
+  };
+
+  const shouldShowMoreButton = post.text.length >= 300;
+  const displayText = showMore ? post.text : post.text.slice(0, 299);
 
   return (
     <div className="posts-wrapper">
@@ -76,12 +91,11 @@ const displayText = showMore ? post.text : post.text.slice(0, 300) + "...";
         <p className={`post-body ${showMore ? "show-more" : ""}`}>
           {displayText}
         </p>
-        {post.text.length > 300 && (
+        {shouldShowMoreButton && (
           <button className="show-more-button" onClick={toggleText}>
             {showMore ? "Show less" : "Show more"}
           </button>
         )}
-
         <div className="upvotes">
           <svg
             onClick={() => handleUpvote(post.id)}
@@ -98,7 +112,7 @@ const displayText = showMore ? post.text : post.text.slice(0, 300) + "...";
               strokeWidth="3"
             />
           </svg>
-          <p>{voteCount}</p>
+          <p style={{ color: votesColor().color }}>{voteCount}</p>
           <svg
             onClick={() => handleDownvote(post.id)}
             style={{ transform: "rotate(180deg)" }}

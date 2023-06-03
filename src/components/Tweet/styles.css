@@ -44,9 +44,8 @@
   margin: 10px;
   width: 95%;
   align-self: flex-start;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .post-body.show-more {
