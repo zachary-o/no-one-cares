@@ -1,5 +1,6 @@
 .side-panel {
   width: 25%;
+  height: 100vh;
   background-color: antiquewhite;
   margin-top: -40px;
   padding: 30px 10px;

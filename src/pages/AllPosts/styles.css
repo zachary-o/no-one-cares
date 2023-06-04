@@ -10,4 +10,5 @@ main {
   align-items: center;
   justify-content: center;
   width: 70%;
+  margin: 0 auto;
 }
