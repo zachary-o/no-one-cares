@@ -22,10 +22,13 @@ const SearchBar = () => {
 
     const resultsArray = allPosts.filter(
       (post) =>
-        post.author.includes(event.target.value) ||
-        post.text.includes(event.target.value) ||
-        post.title.includes(event.target.value) 
-        // post.createdAt.slice(0, 11).includes(event.target.value)
+        post.author.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        post.text.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        post.title.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        post.createdAt
+          .toLowerCase()
+          .slice(0, 11)
+          .includes(event.target.value.toLowerCase())
     );
 
     setSearchResults(resultsArray);
@@ -34,7 +37,6 @@ const SearchBar = () => {
   const handleResetSearch = () => {
     setSearchResults("");
   };
-
 
   return (
     <div>

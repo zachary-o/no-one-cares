@@ -15,9 +15,12 @@ const SearchResults = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
+  console.log(searchResults);
+
   return (
     <div className="wrapper">
       <Navbar />
+      {searchResults.length > 0 ? <h1>Search Results:</h1> : null}
       {searchResults?.length ? (
         searchResults
           .slice(0, visible)
