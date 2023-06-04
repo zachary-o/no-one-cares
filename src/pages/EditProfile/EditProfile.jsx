@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 import editUser from "../../utils/editUser";
 
@@ -18,7 +19,14 @@ const EditProfile = () => {
   const [authStatus, setAuthStatus] = useState("");
   const [isAuth, setIsAuth] = useState(null);
 
-  const { loggedUser, posts } = useContext(Context);
+  const {
+    loggedUser,
+    setLoggedUser,
+    posts,
+    localStorageUser,
+    setLocalStorageUser,
+  } = useContext(Context);
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -94,22 +102,51 @@ const EditProfile = () => {
     }
 
     try {
-      setNewProfileInfo((prevInfo) => ({
-        ...prevInfo,
+      const updatedProfileInfo = {
         password: newProfileInfo.password || loggedUser.password,
         email: newProfileInfo.email || loggedUser.email,
-      }));
+      };
 
-      await editUser(loggedUser.id, newProfileInfo);
+      setNewProfileInfo(updatedProfileInfo);
+      setLocalStorageUser({ ...localStorageUser, ...updatedProfileInfo }); // Update the global context and localStorage
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...localStorageUser, ...updatedProfileInfo })
+      ); // Update the user data in localStorage
+
+      await editUser(loggedUser.id, updatedProfileInfo);
       setIsAuth(true);
       if (editProfile) {
         setAuthStatus("Successfully updated info");
       }
       setEditProfile(!editProfile);
+
+      // Update the loggedUser with the new profile info
+      setLoggedUser({ ...loggedUser, ...updatedProfileInfo }); // Update the loggedUser with the new profile info
     } catch (error) {
       console.error("An error occurred while saving user info:", error);
     }
   };
+
+  useEffect(() => {
+    // Retrieve email from localStorage and populate the input if it exists
+    const storedEmail = localStorage.getItem("email");
+    setNewProfileInfo((prevInfo) => ({
+      ...prevInfo,
+      email: storedEmail || prevInfo.email,
+    }));
+
+    // Retrieve user data from localStorage and set it to the global context if it exists
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setLocalStorageUser(storedUser);
+      setNewProfileInfo((prevInfo) => ({
+        ...prevInfo,
+        password: storedUser.password || prevInfo.password,
+        email: storedUser.email || prevInfo.email,
+      }));
+    }
+  }, [setLocalStorageUser]);
 
   return (
     <div className="wrapper">
@@ -236,7 +273,6 @@ const EditProfile = () => {
           className="edit-user-info-button"
           type={editProfile ? "submit" : ""}
           onClick={(event) => handleSaveUserInfo(event)}
-          disabled={!newProfileInfo.password && !newProfileInfo.email}
         >
           {editProfile ? "Save" : "Edit profile"}
         </button>

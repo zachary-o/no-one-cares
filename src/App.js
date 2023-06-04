@@ -58,7 +58,7 @@ function App() {
     setLoggedUser(users.find((user) => user.login === localStorageUser.login));
   }, [users]);
 
-console.log(localStorageUser)
+  console.log(localStorageUser);
 
   return (
     <Context.Provider
@@ -70,6 +70,7 @@ console.log(localStorageUser)
         users,
         setUsers,
         loggedUser,
+        setLoggedUser,
         searchResults,
         setSearchResults,
         allPosts,
