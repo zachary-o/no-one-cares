@@ -1,13 +1,26 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import updatePost from "../../utils/updatePost";
 import "./styles.css";
 
 const Tweet = ({ post }) => {
-  const { posts, setPosts, loggedUser } = useContext(Context);
+  const { users, posts, setPosts, loggedUser } = useContext(Context);
   const [voteCount, setVoteCount] = useState(post.upvotes || 0);
   const [showMore, setShowMore] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigateUser = (author) => {
+    const neededUser = users.filter((user) => user.login === author);
+
+    const { id } = neededUser[0];
+    if (loggedUser.login === author) {
+      navigate("/");
+    } else {
+      navigate(`/user/${id}`);
+    }
+  };
 
   const handleUpvote = async (postId) => {
     const hasVoted = post.voters.includes(loggedUser.login);
@@ -83,7 +96,9 @@ const Tweet = ({ post }) => {
     <div className="posts-wrapper">
       <div className="post-wrapper">
         <div className="author-and-date">
-          <p>@{post.author}</p>
+          <p onClick={() => handleNavigateUser(post.author)} className="author">
+            @{post.author}
+          </p>
           <p>{post.createdAt}</p>
         </div>
 

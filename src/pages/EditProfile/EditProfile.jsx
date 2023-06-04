@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../App";
-import { useNavigate } from "react-router-dom";
 
 import editUser from "../../utils/editUser";
 
@@ -26,7 +25,6 @@ const EditProfile = () => {
     localStorageUser,
     setLocalStorageUser,
   } = useContext(Context);
-  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);

@@ -10,7 +10,6 @@
 .post-wrapper {
   display: flex;
   flex-direction: column;
-
   width: 70%;
   max-height: 700px;
   margin: 10px auto;
@@ -30,8 +29,14 @@
   color: rgb(68, 68, 68);
 }
 
-.author-and-date p {
+.author {
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.author:hover {
+  color: blue;
+  text-decoration: underline;
 }
 
 .post-title {
