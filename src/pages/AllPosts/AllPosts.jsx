@@ -1,28 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../../App";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
 import SidePanel from "../../components/SidePanel/SidePanel";
 
-import getPosts from "../../utils/getPosts";
-
 import "./styles.css";
 
 const AllPosts = () => {
   const [visible, setVisible] = useState(3);
-  const [allPosts, setAllPosts] = useState([]);
-
+  const { allPosts } = useContext(Context);
   const handleShowMorePosts = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const posts = await getPosts();
-      setAllPosts(posts.reverse());
-    };
-    fetchPosts();
-  }, []);
 
   return (
     <div className="wrapper">
@@ -41,7 +32,7 @@ const AllPosts = () => {
             </button>
           ) : null}
         </div>
-        <SidePanel allPosts={allPosts} />
+        <SidePanel />
       </main>
     </div>
   );

@@ -217,7 +217,7 @@ const EditProfile = () => {
                 <td>
                   <input
                     type="text"
-                    value={karma ? karma : "Loading..."}
+                    value={karma}
                     readOnly
                     style={totalKarmaStyles()}
                   />

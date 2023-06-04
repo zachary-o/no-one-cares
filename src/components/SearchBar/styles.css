@@ -1,0 +1,36 @@
+.search {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.search-input {
+  height: 44px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  padding-left: 50px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.search-input {
+  outline: 1px solid #97d9e1;
+}
+
+.search-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.search-clear-active {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.search-clear {
+  display: none;
+}

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
-const SidePanel = ({ allPosts }) => {
-  const { users, loggedUser } = useContext(Context);
+const SidePanel = () => {
+  const { users, loggedUser, allPosts } = useContext(Context);
   const navigate = useNavigate();
 
   const handleNavigateUser = (id) => {

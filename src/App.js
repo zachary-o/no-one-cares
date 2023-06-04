@@ -10,14 +10,17 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AllPosts from "./pages/AllPosts/AllPosts";
 import UserPage from "./pages/UserPage/UserPage";
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 export const Context = createContext();
 
 function App() {
   const [users, setUsers] = useState([]);
   const [localStorageUser, setLocalStorageUser] = useState("");
+  const [allPosts, setAllPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
+  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +30,7 @@ function App() {
     };
 
     fetchUsers();
-  }, []);
+  }, [localStorageUser]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -41,9 +44,11 @@ function App() {
   useEffect(() => {
     const fetchPosts = async () => {
       const posts = await getPosts();
-      const usersPosts = posts
-        .filter((user) => user.author === localStorageUser.login)
-        .reverse();
+      setAllPosts(posts.reverse());
+      const usersPosts = posts.filter(
+        (user) => user.author === localStorageUser.login
+      );
+
       setPosts(usersPosts);
     };
     fetchPosts();
@@ -51,7 +56,9 @@ function App() {
 
   useEffect(() => {
     setLoggedUser(users.find((user) => user.login === localStorageUser.login));
-  }, [users, localStorageUser]);
+  }, [users]);
+
+console.log(localStorageUser)
 
   return (
     <Context.Provider
@@ -63,6 +70,9 @@ function App() {
         users,
         setUsers,
         loggedUser,
+        searchResults,
+        setSearchResults,
+        allPosts,
       }}
     >
       <div className="App">
@@ -73,6 +83,7 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/all-posts" element={<AllPosts />} />
           <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/search" element={<SearchResults />} />
         </Routes>
       </div>
     </Context.Provider>

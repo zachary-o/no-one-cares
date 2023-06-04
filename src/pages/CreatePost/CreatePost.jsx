@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import Navbar from "../../components/Navbar/Navbar";
@@ -23,6 +23,7 @@ const CreatePost = () => {
 
   const handleSavePost = async (event) => {
     event.preventDefault();
+
     try {
       await createPost(newPost);
       setNewPost({
@@ -70,6 +71,7 @@ const CreatePost = () => {
       createdAt: postCreationTime,
     }));
   };
+
 
   return (
     <div className="wrapper">

@@ -1,16 +1,14 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { Context } from "../../App";
+
+import "./styles.css";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
 
-import "./styles.css";
-
-const HomePage = () => {
+const SearchResults = () => {
+  const { searchResults } = useContext(Context);
   const [visible, setVisible] = useState(3);
-  const { posts } = useContext(Context);
-  const navigate = useNavigate();
 
   const handleShowMorePosts = () => {
     setVisible((prevValue) => prevValue + 3);
@@ -19,22 +17,14 @@ const HomePage = () => {
   return (
     <div className="wrapper">
       <Navbar />
-      <button
-        onClick={() => {
-          navigate("/create-post");
-        }}
-        className="create-post-button"
-      >
-        Create new post
-      </button>
-      {posts.length ? (
-        posts
+      {searchResults?.length ? (
+        searchResults
           .slice(0, visible)
           .map((post) => <Tweet key={post.id} post={post} />)
       ) : (
-        <h1>No posts yet...</h1>
+        <h1>No Matching Posts</h1>
       )}
-      {posts.length > 0 && visible <= posts.length ? (
+      {searchResults.length > 0 && visible <= searchResults.length ? (
         <button onClick={handleShowMorePosts} className="load-more-button">
           Load more
         </button>
@@ -42,4 +32,4 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;
+export default SearchResults;
