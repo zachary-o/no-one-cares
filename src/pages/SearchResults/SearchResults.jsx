@@ -5,6 +5,7 @@ import "./styles.css";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
+import BackToTopButton from "../../components/BackToTopButton/BackToTopButton";
 
 const SearchResults = () => {
   const { searchResults } = useContext(Context);
@@ -29,6 +30,7 @@ const SearchResults = () => {
           Load more
         </button>
       ) : null}
+      <BackToTopButton />
     </div>
   );
 };

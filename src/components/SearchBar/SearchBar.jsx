@@ -24,8 +24,8 @@ const SearchBar = () => {
       (post) =>
         post.author.includes(event.target.value) ||
         post.text.includes(event.target.value) ||
-        post.title.includes(event.target.value) ||
-        post.createdAt.slice(0, 11).includes(event.target.value)
+        post.title.includes(event.target.value) 
+        // post.createdAt.slice(0, 11).includes(event.target.value)
     );
 
     setSearchResults(resultsArray);
@@ -34,6 +34,7 @@ const SearchBar = () => {
   const handleResetSearch = () => {
     setSearchResults("");
   };
+
 
   return (
     <div>

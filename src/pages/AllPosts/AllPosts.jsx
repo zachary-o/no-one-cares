@@ -4,6 +4,7 @@ import { Context } from "../../App";
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
 import SidePanel from "../../components/SidePanel/SidePanel";
+import BackToTopButton from "../../components/BackToTopButton/BackToTopButton";
 
 import "./styles.css";
 
@@ -13,7 +14,6 @@ const AllPosts = () => {
   const handleShowMorePosts = () => {
     setVisible((prevValue) => prevValue + 3);
   };
-
 
   return (
     <div className="wrapper">
@@ -34,6 +34,7 @@ const AllPosts = () => {
         </div>
         <SidePanel />
       </main>
+      <BackToTopButton />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Context } from "../../App";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
+import BackToTopButton from "../../components/BackToTopButton/BackToTopButton";
 
 import "./styles.css";
 
@@ -39,6 +40,7 @@ const HomePage = () => {
           Load more
         </button>
       ) : null}
+      <BackToTopButton />
     </div>
   );
 };

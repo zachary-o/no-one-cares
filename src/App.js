@@ -58,7 +58,6 @@ function App() {
     setLoggedUser(users.find((user) => user.login === localStorageUser.login));
   }, [users]);
 
-  console.log(localStorageUser);
 
   return (
     <Context.Provider

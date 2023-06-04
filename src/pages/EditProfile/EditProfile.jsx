@@ -108,11 +108,11 @@ const EditProfile = () => {
       };
 
       setNewProfileInfo(updatedProfileInfo);
-      setLocalStorageUser({ ...localStorageUser, ...updatedProfileInfo }); // Update the global context and localStorage
+      setLocalStorageUser({ ...localStorageUser, ...updatedProfileInfo });
       localStorage.setItem(
         "user",
         JSON.stringify({ ...localStorageUser, ...updatedProfileInfo })
-      ); // Update the user data in localStorage
+      );
 
       await editUser(loggedUser.id, updatedProfileInfo);
       setIsAuth(true);
@@ -121,22 +121,19 @@ const EditProfile = () => {
       }
       setEditProfile(!editProfile);
 
-      // Update the loggedUser with the new profile info
-      setLoggedUser({ ...loggedUser, ...updatedProfileInfo }); // Update the loggedUser with the new profile info
+      setLoggedUser({ ...loggedUser, ...updatedProfileInfo });
     } catch (error) {
       console.error("An error occurred while saving user info:", error);
     }
   };
 
   useEffect(() => {
-    // Retrieve email from localStorage and populate the input if it exists
     const storedEmail = localStorage.getItem("email");
     setNewProfileInfo((prevInfo) => ({
       ...prevInfo,
       email: storedEmail || prevInfo.email,
     }));
 
-    // Retrieve user data from localStorage and set it to the global context if it exists
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       setLocalStorageUser(storedUser);
