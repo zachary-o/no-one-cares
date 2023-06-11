@@ -9,21 +9,31 @@
   box-shadow: 0px 0px 72px 7px rgba(100, 144, 191, 1);
 
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   margin-bottom: 40px;
 }
 
 .logo {
   width: 150px;
+  max-height: 45.97px;
+  justify-content: left;
   cursor: pointer;
 }
 
 .user-info {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
+}
+
+#hidden {
+  display: flex;
+}
+
+.username-button-container {
+  display: flex;
 }
 
 .username-button {
@@ -37,7 +47,7 @@
 }
 
 .logout-button {
-  width: 18px;
+  width: 14px;
   margin-left: 5px;
   cursor: pointer;
   fill: gray;
@@ -47,8 +57,16 @@
   fill: black;
 }
 
+.home-link {
+  margin: 0 10px;
+  margin-left: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  color: blue;
+}
+
 .all-posts-link {
-  margin-right: 20px;
+  margin: 0 10px;
   text-decoration: none;
   cursor: pointer;
   color: blue;
@@ -58,4 +76,71 @@
   color: blue;
 }
 
+.hamburger {
+  display: none;
+}
 
+@media only screen and (max-width: 1000px) {
+  .search-input {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .user-info {
+    font-size: 14px;
+  }
+
+  .search-input {
+    width: 230px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .logo {
+    width: 120px;
+  }
+
+  .user-info {
+    font-size: 12px;
+  }
+
+  .search-input {
+    width: 170px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .hamburger {
+    cursor: pointer;
+    display: flex;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  #hidden {
+    position: absolute;
+    left: 0;
+    top: 80px;
+    height: auto;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow:inset 0px -10px 10px -10px rgba(100, 144, 191, 1);
+    -moz-box-shadow:inset 0px -10px 10px -10px rgba(100, 144, 191, 1);
+    box-shadow:inset 0px -10px 10px -10px rgba(100, 144, 191, 1);
+  }
+
+  #hidden > * {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+}

@@ -74,7 +74,7 @@ const SidePanel = () => {
               >
                 {user.login}
               </p>
-              <span>
+              <span className="posts-number">
                 {user.posts === 1
                   ? `${user.posts} post`
                   : `${user.posts} posts`}

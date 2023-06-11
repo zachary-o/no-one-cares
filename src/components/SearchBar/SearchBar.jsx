@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
@@ -8,6 +8,7 @@ import cross from "../../assets/icons/cross.svg";
 
 const SearchBar = () => {
   const { allPosts, searchResults, setSearchResults } = useContext(Context);
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -16,10 +17,18 @@ const SearchBar = () => {
   };
 
   const handleSearchChange = (event) => {
-    if (!event.target.value) {
-      return setSearchResults(allPosts);
+    const inputValue = event.target.value;
+
+    if (
+      inputValue === "" &&
+      event.nativeEvent.inputType === "deleteContentBackward"
+    ) {
+      setSearchInput("");
+      setSearchResults([]);
+      return;
     }
 
+    setSearchInput(event.target.value);
     const resultsArray = allPosts.filter(
       (post) =>
         post.author.toLowerCase().includes(event.target.value.toLowerCase()) ||
@@ -35,12 +44,13 @@ const SearchBar = () => {
   };
 
   const handleResetSearch = () => {
-    setSearchResults("");
+    setSearchInput("");
+    setSearchResults([]);
   };
 
   return (
     <div>
-      <form className="search" onSubmit={handleSubmit}>
+      <form className="search" onSubmit={(event) => handleSubmit(event)}>
         <img
           src={search}
           alt="search"
@@ -50,14 +60,13 @@ const SearchBar = () => {
         <input
           className="search-input"
           type="text"
-          onChange={handleSearchChange}
+          value={searchInput}
+          onChange={(event) => handleSearchChange(event)}
         />
         <img
           src={cross}
           alt=""
-          className={
-            searchResults.length > 0 ? "search-clear-active" : "search-clear"
-          }
+          className={searchInput ? "search-clear-active" : "search-clear"}
           onClick={handleResetSearch}
         />
       </form>

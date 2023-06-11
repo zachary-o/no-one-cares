@@ -1,5 +1,4 @@
 
-
 .create-post {
   display: flex;
   flex-wrap: wrap;
@@ -57,4 +56,16 @@ h4 {
   text-align: center;
   color: red;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 750px) {
+  .create-post {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .create-post {
+    width: 90%;
+  }
 }

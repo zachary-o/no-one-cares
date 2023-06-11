@@ -35,3 +35,21 @@
 .top-user-link:hover {
   text-decoration: underline;
 }
+
+@media only screen and (max-width: 850px) {
+  h2 {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .posts-number {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .side-panel {
+    display: none;
+  }
+}

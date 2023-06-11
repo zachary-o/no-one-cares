@@ -1,4 +1,5 @@
 .search {
+  align-self: center;
   position: relative;
   width: 100%;
   margin: 0 auto;
@@ -6,6 +7,7 @@
 
 .search-input {
   height: 36px;
+  width: 400px;
   margin: 0 auto;
   padding: 10px 20px;
   padding-left: 50px;

@@ -15,8 +15,6 @@ const SearchResults = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
-  console.log(searchResults);
-
   return (
     <div className="wrapper">
       <Navbar />

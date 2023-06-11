@@ -106,3 +106,27 @@
 .downvote:hover {
   fill: red;
 }
+
+@media only screen and (max-width: 850px) {
+  .post-title {
+    font-size: 22px;
+  }
+  .post-body {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .post-title {
+    font-size: 18px;
+  }
+  .post-body {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .post-title {
+    font-size: 16px;
+  }
+}
