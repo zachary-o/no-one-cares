@@ -281,7 +281,7 @@ const EditProfile = () => {
           Delete Profile
         </button>
       </div>
-      {openModal && <Modal setOpenModal={setOpenModal} />}
+      {openModal && <Modal setOpenModal={setOpenModal} title="profile" />}
     </div>
   );
 };

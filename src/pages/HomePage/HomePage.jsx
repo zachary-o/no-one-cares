@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
@@ -16,6 +16,8 @@ const HomePage = () => {
   const handleShowMorePosts = () => {
     setVisible((prevValue) => prevValue + 3);
   };
+
+ 
 
   return (
     <div className="wrapper">

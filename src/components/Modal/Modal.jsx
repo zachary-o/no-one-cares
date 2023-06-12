@@ -2,20 +2,29 @@ import { useContext } from "react";
 import { Context } from "../../App";
 import { useNavigate } from "react-router-dom";
 import deleteUser from "../../utils/deleteUser";
+import deletePost from "../../utils/deletePost";
 
 import "./styles.css";
 
 import cross from "../../assets/icons/cross.svg";
 
-const Modal = ({ setOpenModal }) => {
+const Modal = ({ setOpenModal, post, title }) => {
   const { loggedUser, setLoggedUser } = useContext(Context);
   const navigate = useNavigate();
 
-  const handleDeleteuser = async () => {
-    await deleteUser(loggedUser.id);
-    localStorage.removeItem("user");
-    setLoggedUser(null);
-    navigate("/login");
+  const handleDelete = async () => {
+    if (title === "profile") {
+      await deleteUser(loggedUser.id);
+      localStorage.removeItem("user");
+      setLoggedUser(null);
+      navigate("/login");
+    } else if (title === "post") {
+      await deletePost(post.id);
+      setOpenModal(false);
+      navigate("/all-posts");
+    }
+    console.log(post);
+    return;
   };
 
   return (
@@ -28,7 +37,7 @@ const Modal = ({ setOpenModal }) => {
           className="close-modal"
         />
         <div className="modal-title">
-          <h3>Are you sure you want to delete profile?</h3>
+          <h3>Are you sure you want to delete {title}?</h3>
         </div>
         <div className="modal-footer">
           <button
@@ -37,7 +46,7 @@ const Modal = ({ setOpenModal }) => {
           >
             Cancel
           </button>
-          <button className="modal-button-delete" onClick={handleDeleteuser}>
+          <button className="modal-button-delete" onClick={handleDelete}>
             Delete
           </button>
         </div>
