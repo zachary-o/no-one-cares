@@ -4,12 +4,14 @@ import { Context } from "../../App";
 import editUser from "../../utils/editUser";
 
 import Navbar from "../../components/Navbar/Navbar";
+import Modal from "../../components/Modal/Modal";
 
 import "./styles.css";
 
 const EditProfile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [karma, setKarma] = useState("");
   const [newProfileInfo, setNewProfileInfo] = useState({
     password: "",
@@ -262,16 +264,24 @@ const EditProfile = () => {
         <h1>Loading data...</h1>
       )}
       <h4 style={{ color: isAuth ? "green" : "red" }}>{authStatus}</h4>
-
-      {loggedUser && posts && (
+      <div className="profile-buttons">
+        {loggedUser && posts && (
+          <button
+            className="edit-user-info-button"
+            type={editProfile ? "submit" : ""}
+            onClick={(event) => handleSaveUserInfo(event)}
+          >
+            {editProfile ? "Save" : "Edit profile"}
+          </button>
+        )}
         <button
-          className="edit-user-info-button"
-          type={editProfile ? "submit" : ""}
-          onClick={(event) => handleSaveUserInfo(event)}
+          className="delete-profile-button"
+          onClick={() => setOpenModal(true)}
         >
-          {editProfile ? "Save" : "Edit profile"}
+          Delete Profile
         </button>
-      )}
+      </div>
+      {openModal && <Modal setOpenModal={setOpenModal} />}
     </div>
   );
 };
