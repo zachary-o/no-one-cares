@@ -55,7 +55,8 @@ const EditTweetModal = ({ setEditPost, post }) => {
       createdAt: postCreationTime,
     }));
   };
-console.log(editOldPost.title, editOldPost.text)
+
+
   return (
     <div className="modal-background">
       <div className="edit-post-container">

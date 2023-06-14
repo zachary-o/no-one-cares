@@ -35,7 +35,6 @@ const DeleteModal = ({ setOpenModal, post, title }) => {
     return;
   };
 
-  console.log(loggedUser)
 
   return (
     <div className="modal-background">
