@@ -5,11 +5,14 @@ import { Context } from "../../App";
 import Navbar from "../../components/Navbar/Navbar";
 import Tweet from "../../components/Tweet/Tweet";
 import BackToTopButton from "../../components/BackToTopButton/BackToTopButton";
+import CreateTweetModal from "../../components/CreateTweetModal/CreateTweetModal";
 
 import "./styles.css";
 
 const HomePage = () => {
   const [visible, setVisible] = useState(3);
+  const [openModal, setOpenModal] = useState(false);
+
   const { posts } = useContext(Context);
   const navigate = useNavigate();
 
@@ -17,17 +20,10 @@ const HomePage = () => {
     setVisible((prevValue) => prevValue + 3);
   };
 
- 
-
   return (
     <div className="wrapper">
       <Navbar />
-      <button
-        onClick={() => {
-          navigate("/create-post");
-        }}
-        className="create-post-button"
-      >
+      <button onClick={() => setOpenModal(true)} className="create-post-button">
         Create new post
       </button>
       {posts.length ? (
@@ -43,6 +39,7 @@ const HomePage = () => {
         </button>
       ) : null}
       <BackToTopButton />
+      {openModal && <CreateTweetModal setOpenModal={setOpenModal} />}
     </div>
   );
 };

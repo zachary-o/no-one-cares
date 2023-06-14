@@ -1,11 +1,12 @@
 .side-panel {
-  width: 25%;
-  height: 100vh;
+  max-height: 680px;
+  overflow-x: scroll;
   background-color: antiquewhite;
-  margin-top: -40px;
+  margin-top: 55px;
   padding: 30px 10px;
   height: auto;
-  border-radius: 0 0 0 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
 }
 
 .top-users {
@@ -16,6 +17,7 @@
   display: flex;
   justify-content: space-between;
   padding: 4px 0;
+  gap: 15px;
 }
 
 .top-users-header {
@@ -39,6 +41,11 @@
 @media only screen and (max-width: 850px) {
   h2 {
     font-size: 18px;
+  }
+
+  .top-user p,
+  .top-user span {
+    font-size: 10px;
   }
 }
 

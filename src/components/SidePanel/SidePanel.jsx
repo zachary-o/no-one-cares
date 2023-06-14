@@ -16,7 +16,7 @@ const SidePanel = () => {
     }
   };
 
-  const sortedUsers = users.sort((a, b) => b.posts - a.posts);
+  const sortedUsers = users.sort((a, b) => b.posts - a.posts).slice(0, 10);
 
   const uniqueAuthors = {};
   allPosts.forEach((post) => {
@@ -35,8 +35,8 @@ const SidePanel = () => {
       author,
       upvotes: uniqueAuthors[author],
     }))
-    .sort((a, b) => b.upvotes - a.upvotes);
-
+    .sort((a, b) => b.upvotes - a.upvotes)
+    .slice(0, 10);
 
   const setArrowStyles = (index) => {
     const upvotes = uniqueAuthorsArr[index].upvotes;

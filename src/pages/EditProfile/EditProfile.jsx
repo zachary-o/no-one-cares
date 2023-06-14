@@ -4,7 +4,7 @@ import { Context } from "../../App";
 import editUser from "../../utils/editUser";
 
 import Navbar from "../../components/Navbar/Navbar";
-import Modal from "../../components/Modal/Modal";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 import "./styles.css";
 
@@ -281,7 +281,7 @@ const EditProfile = () => {
           Delete Profile
         </button>
       </div>
-      {openModal && <Modal setOpenModal={setOpenModal} title="profile" />}
+      {openModal && <DeleteModal setOpenModal={setOpenModal} title="profile" />}
     </div>
   );
 };

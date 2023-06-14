@@ -42,7 +42,7 @@ const UserPage = () => {
           .slice(0, visible)
           .map((post) => <Tweet key={post.id} post={post} />)
       ) : (
-        <h1>Loading...</h1>
+        null
       )}
       {userPosts.length > 0 && visible <= userPosts.length ? (
         <button onClick={handleShowMorePosts} className="load-more-button">

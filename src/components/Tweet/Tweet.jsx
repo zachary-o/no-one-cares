@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import updatePost from "../../utils/updatePost";
+
+import DeleteModal from "../DeleteModal/DeleteModal";
+import EditTweetModal from "../EditTweetModal/EditTweetModal";
+
 import "./styles.css";
-import Modal from "../Modal/Modal";
 
 const Tweet = ({ post }) => {
   const { users, posts, setPosts, loggedUser } = useContext(Context);
   const [voteCount, setVoteCount] = useState(post.upvotes || 0);
   const [showMore, setShowMore] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [editPost, setEditPost] = useState(false);
 
   const navigate = useNavigate();
 
@@ -152,6 +156,7 @@ const Tweet = ({ post }) => {
           {loggedUser?.login === post.author ? (
             <div className="edit-delete-post">
               <svg
+                onClick={() => setEditPost(true)}
                 className="edit-post"
                 xmlns="http://www.w3.org/2000/svg"
                 width="36"
@@ -190,8 +195,9 @@ const Tweet = ({ post }) => {
         </div>
       </div>
       {openModal && (
-        <Modal setOpenModal={setOpenModal} post={post} title="post" />
+        <DeleteModal setOpenModal={setOpenModal} post={post} title="post" />
       )}
+      {editPost && <EditTweetModal setEditPost={setEditPost} post={post} />}
     </div>
   );
 };

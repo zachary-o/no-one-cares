@@ -1,14 +1,15 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import Navbar from "../../components/Navbar/Navbar";
 
 import createPost from "../../utils/createPost";
 import updateUser from "../../utils/updateUser";
 
 import "./styles.css";
 
-const CreatePost = () => {
+import cross from "../../assets/icons/cross.svg";
+
+const CreateTweetModal = ({ setOpenModal }) => {
   const { localStorageUser, posts, loggedUser } = useContext(Context);
   const [newPost, setNewPost] = useState({
     author: "",
@@ -38,8 +39,9 @@ const CreatePost = () => {
       const userPostsNumber = posts.filter(
         (post) => post.author === localStorageUser.login
       ).length;
-      await updateUser(loggedUser.id, userPostsNumber);
-      navigate("/");
+      await updateUser(loggedUser.id, userPostsNumber, "create");
+      setOpenModal(false);
+      window.location.reload();
     } catch (error) {
       throw error;
     }
@@ -72,11 +74,15 @@ const CreatePost = () => {
     }));
   };
 
-
   return (
-    <div className="wrapper">
-      <Navbar />
+    <div className="modal-background">
       <div className="create-post">
+        <img
+          src={cross}
+          alt="close-modal"
+          className="close-modal"
+          onClick={() => setOpenModal(false)}
+        />
         <form action="">
           <h4>{authStatus}</h4>
           <label htmlFor="title">Title</label>
@@ -110,4 +116,4 @@ const CreatePost = () => {
     </div>
   );
 };
-export default CreatePost;
+export default CreateTweetModal;

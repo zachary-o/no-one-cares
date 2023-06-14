@@ -6,7 +6,6 @@ import getUsers from "./utils/getUsers";
 
 import Authorization from "./pages/Authorization/Authorization";
 import HomePage from "./pages/HomePage/HomePage";
-import CreatePost from "./pages/CreatePost/CreatePost";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import AllPosts from "./pages/AllPosts/AllPosts";
 import UserPage from "./pages/UserPage/UserPage";
@@ -58,7 +57,6 @@ function App() {
     setLoggedUser(users.find((user) => user.login === localStorageUser.login));
   }, [users]);
 
-
   return (
     <Context.Provider
       value={{
@@ -79,7 +77,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Authorization />} />
-          <Route path="/create-post" element={<CreatePost />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/all-posts" element={<AllPosts />} />
           <Route path="/user/:id" element={<UserPage />} />
