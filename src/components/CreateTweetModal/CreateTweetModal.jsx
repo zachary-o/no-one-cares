@@ -19,7 +19,6 @@ const CreateTweetModal = ({ setOpenModal }) => {
     upvotes: "",
     id: "",
   });
-  const navigate = useNavigate();
   const [authStatus, setAuthStatus] = useState("");
 
   const handleSavePost = async (event) => {
