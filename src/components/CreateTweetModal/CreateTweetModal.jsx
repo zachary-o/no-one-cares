@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 
 import createPost from "../../utils/createPost";
